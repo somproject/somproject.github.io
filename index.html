@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>체스 경기 분석 GIF 생성기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 0.5rem;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #007BFF;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>체스 경기 분석 GIF 생성기</h1>
+    <form id="chessForm">
+      <label for="chessLink">체스닷컴 경기 분석 링크:</label><br>
+      <input type="text" id="chessLink" name="chessLink" placeholder="https://www.chess.com/..."><br>
+      <input type="submit" value="분석 시작">
+    </form>
+  </div>
+  <script>
+    document.getElementById('chessForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var link = document.getElementById('chessLink').value;
+      console.log('입력된 링크:', link);
+      // 여기서 API 호출 및 GIF 생성 로직을 추가하면 됩니다.
+    });
+  </script>
+</body>
+</html>
