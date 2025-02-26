@@ -59,8 +59,8 @@
     <!-- 소제목 -->
     <h2>탁월이 들어가는 체스 GIF 생성기</h2>
     <form id="chessForm">
-      <label for="chessLink">체스닷컴 경기 분석 링크:</label><br>
-      <input type="text" id="chessLink" name="chessLink" placeholder="https://www.chess.com/..."><br>
+      <label for="chessLink">체스닷컴 경기 링크:</label><br>
+      <input type="text" id="chessLink" name="chessLink" placeholder=""><br>
       <input type="submit" value="시작">
     </form>
   </div>
@@ -70,6 +70,7 @@
       var link = document.getElementById('chessLink').value;
       console.log('입력된 링크:', link);
       // 여기에 API 호출 및 GIF 생성 로직 추가
+
     });
   </script>
 </body>
