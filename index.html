@@ -68,9 +68,8 @@
     document.getElementById('chessForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var link = document.getElementById('chessLink').value;
-      console.log('입력된 링크:', link);
-      // 여기에 API 호출 및 GIF 생성 로직 추가
-
+      // 입력된 링크를 쿼리 스트링으로 전달하며 main.html로 이동
+      window.location.href = 'main.html?chessLink=' + encodeURIComponent(link);
     });
   </script>
 </body>
