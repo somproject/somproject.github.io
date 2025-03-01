@@ -51,23 +51,43 @@
     input[type="submit"]:hover {
       background: #0056b3;
     }
+
+    .icon-group {
+      display: inline-block;
+      margin-left: -30px; 
+      vertical-align: middle;
+    }
     .help-icon {
       position: relative;
       cursor: help;
       display: inline-block;
+      width: 64px;
+      height: 64px;
+      margin-right: 4px;
+    }
+    .help-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
     .hover-image {
       display: none;
       position: absolute;
-      left: 25px;
-      top: 0;
+      left: 30px; 
+      top: 50%;
+      transform: translateY(-50%);
       width: 200px;
       border: 1px solid #ccc;
       border-radius: 4px;
       z-index: 100;
+      background: white;
     }
     .help-icon:hover .hover-image {
       display: block;
+    }
+    form label {
+      display: inline-block;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -77,10 +97,17 @@
     <h2>탁월한 체스 GIF 생성기</h2>
     <form id="chessForm">
       <label for="chessLink">
+        <div class="icon-group">
+          <span class="help-icon chescom-icon">
+            <img src="images/chessdot_icon.png" alt="체스닷컴">
+            <img src="images/chessdot_guide.jpg" alt="체스닷컴 가이드" class="hover-image">
+          </span>
+          <span class="help-icon lichess-icon">
+            <img src="images/lichess_icon.png" alt="리체스">
+            <img src="images/lichess_guide.jpg" alt="리체스 가이드" class="hover-image">
+          </span>
+        </div>
         PGN을 여기에 붙여넣기하세요:
-        <span class="help-icon">❓
-          <img src="images/logo.png" alt="도움말" class="hover-image">
-        </span>
       </label><br>
       <input type="text" id="chessLink" name="chessLink" placeholder=""><br>
       <input type="submit" value="시작">
@@ -88,22 +115,20 @@
   </div>
 
   <script>
+    // 기존 스크립트 유지
     document.getElementById('chessForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const submitBtn = e.target.querySelector('input[type="submit"]');
       const pgn = document.getElementById('chessLink').value.trim();
 
-      // PGN 유효성 검사
       if (!pgn.match(/^\[(Event|Site|Date|White|Black|Result).+\]/)) {
         alert('유효한 PGN 형식이 아닙니다');
         return;
       }
 
-      // 로딩 상태 표시
       submitBtn.value = '처리 중...';
       submitBtn.disabled = true;
 
-      // localStorage에 저장 후 페이지 이동
       localStorage.setItem('pgnData', pgn);
       window.location.href = 'main.html';
     });
