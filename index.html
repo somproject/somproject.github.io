@@ -46,30 +46,66 @@
       color: white;
       font-size: 1rem;
       cursor: pointer;
+      transition: background 0.3s;
     }
     input[type="submit"]:hover {
       background: #0056b3;
+    }
+    .help-icon {
+      position: relative;
+      cursor: help;
+      display: inline-block;
+    }
+    .hover-image {
+      display: none;
+      position: absolute;
+      left: 25px;
+      top: 0;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      z-index: 100;
+    }
+    .help-icon:hover .hover-image {
+      display: block;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- PNG 로고 -->
     <img src="images/logo.png" alt="Logo" class="logo">
-    <!-- 소제목 -->
-    <h2>탁월이 들어가는 체스 GIF 생성기</h2>
+    <h2>탁월한 체스 GIF 생성기</h2>
     <form id="chessForm">
-      <label for="chessLink">체스닷컴 경기 링크:</label><br>
+      <label for="chessLink">
+        PGN을 여기에 붙여넣기하세요:
+        <span class="help-icon">❓
+          <img src="images/logo.png" alt="도움말" class="hover-image">
+        </span>
+      </label><br>
       <input type="text" id="chessLink" name="chessLink" placeholder=""><br>
       <input type="submit" value="시작">
     </form>
   </div>
+
   <script>
     document.getElementById('chessForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      var link = document.getElementById('chessLink').value;
-      // 입력된 링크를 쿼리 스트링으로 전달하며 main.html로 이동
-      window.location.href = 'main.html?chessLink=' + encodeURIComponent(link);
+      const submitBtn = e.target.querySelector('input[type="submit"]');
+      const pgn = document.getElementById('chessLink').value.trim();
+
+      // PGN 유효성 검사
+      if (!pgn.match(/^\[(Event|Site|Date|White|Black|Result).+\]/)) {
+        alert('유효한 PGN 형식이 아닙니다');
+        return;
+      }
+
+      // 로딩 상태 표시
+      submitBtn.value = '처리 중...';
+      submitBtn.disabled = true;
+
+      // localStorage에 저장 후 페이지 이동
+      localStorage.setItem('pgnData', pgn);
+      window.location.href = 'main.html';
     });
   </script>
 </body>
